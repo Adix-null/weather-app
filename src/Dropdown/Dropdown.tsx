@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Dropdown.scss';
 
 // Define types for props
@@ -27,6 +27,14 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) =>
             onSelect(option);
         }
     };
+
+     // Close the dropdown if a click outside is detected
+    useEffect(() => {
+        let handler = () => {
+            setIsOpen(false);
+        }
+        document.addEventListener('mousedown', handler);
+    });
 
     return (
         <div className="dropdown">

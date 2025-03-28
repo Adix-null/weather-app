@@ -7,16 +7,9 @@ body{
 .container {
     justify-self: center;
     width: 40%;
+    min-width: 400px;
     height: 95vh;
     display: flex;
     flex-direction: column;
     align-items: center;    
-
-    h1 {
-        color: $primary-color;
-    }
-
-    p {
-        color: #333;
-    }
 }

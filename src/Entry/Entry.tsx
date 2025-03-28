@@ -12,8 +12,8 @@ const Entry: React.FC<EntryProps> = ({data}) =>
 {
     return (
         <div className="entry">
-            {data.map(date => (
-                <span>
+            {data.map((date, key) => (
+                <span key={key}>
                     {date.toString()}
                 </span>            
             ))}
