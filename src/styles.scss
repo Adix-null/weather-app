@@ -1,12 +1,16 @@
 $primary-color: #0ea4be;
 
+body{
+    background-color: #f0f2f5;
+}
+
 .container {
+    justify-self: center;
+    width: 40%;
+    height: 95vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 98vh;
-    
-    background-color: #f0f2f5;
+    align-items: center;    
 
     h1 {
         color: $primary-color;

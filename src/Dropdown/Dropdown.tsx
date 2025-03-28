@@ -1,18 +1,23 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './Dropdown.scss';
 
-function Dropdown({ options, onSelect })
+// Define types for props
+interface DropdownProps {
+    options: string[];
+    onSelect?: (option: string) => void;
+}
+
+const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) =>
 {
-    const [isOpen, setIsOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selected, setSelected] = useState('');
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [selected, setSelected] = useState<string>('');
 
     const filteredOptions = options.filter(option =>
         option.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const handleSelect = (option) =>
+    const handleSelect = (option: string): void =>
     {
         setSelected(option);
         setSearchTerm('');
@@ -28,7 +33,7 @@ function Dropdown({ options, onSelect })
             <input
                 type="text"
                 placeholder="Search..."
-                value={searchTerm || selected}
+                value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onFocus={() => setIsOpen(true)}
             />
@@ -51,6 +56,6 @@ function Dropdown({ options, onSelect })
             )}
         </div>
     );
-}
+};
 
 export default Dropdown;
