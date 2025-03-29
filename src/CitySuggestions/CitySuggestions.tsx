@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import "./CitySuggestions.scss";
 import { City } from "../common";
 

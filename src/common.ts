@@ -30,5 +30,5 @@ export const formatDate = (isoString: string, timezone: string, abbreviation: st
 			timeZone: timezone, // Ensures consistent timezone handling
 		})
 		.replace(/GMT[\d\-\+]+/, abbreviation)
-		.replace(" at", "");
+		.replace(" at", ",");
 };

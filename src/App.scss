@@ -1,7 +1,8 @@
-$primary-color: #0ea4be;
+$primary-color: #4fc8dd;
 
 body{
   background-color: #f0f2f5;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -12,4 +13,32 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+button {
+  background-color: $primary-color;
+  color: #ffffff; // White text for contrast
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+
+  &:active {
+    background-color: darken($primary-color, 20%);
+  }
+
+  &:disabled {
+    background-color: lighten($primary-color, 30%);
+    cursor: not-allowed;
+  }
+}
+
+h1{
+  align-self: start;
 }
