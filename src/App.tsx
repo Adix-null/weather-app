@@ -6,6 +6,7 @@ import CitySuggestions from "./CitySuggestions/CitySuggestions";
 import { getWeatherData } from "./APIfetch";
 import { formatDate, WeatherData } from "./common";
 import { loadCities } from "./parseCSV";
+import "./App.scss";
 
 const App: React.FC = () => {
 	const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
