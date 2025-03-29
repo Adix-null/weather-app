@@ -9,6 +9,15 @@ export interface WeatherData {
 	timezoneAbbreviation: string;
 }
 
+export interface City {
+	city: string;
+	lat: number;
+	lng: number;
+	country: string;
+	iso3: string;
+	id: number;
+}
+
 export const formatDate = (isoString: string, timezone: string, abbreviation: string): string => {
 	const date = new Date(isoString);
 
