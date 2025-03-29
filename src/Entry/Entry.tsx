@@ -1,11 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
 import './Entry.scss';
 
 //const [city] = useState('');
 //const [temperature, wind, humidity] = useState(0);
 interface EntryProps {
-    data: (string | Number)[];
+    data: any[];
 }
 
 const Entry: React.FC<EntryProps> = ({data}) =>

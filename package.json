@@ -21,6 +21,7 @@
 	"homepage": "https://github.com/Adix-null/weather-app#readme",
 	"dependencies": {
 		"openmeteo": "^1.2.0",
+		"papaparse": "^5.5.2",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0"
 	},
@@ -28,10 +29,12 @@
 		"@babel/core": "^7.26.10",
 		"@babel/preset-env": "^7.26.9",
 		"@babel/preset-react": "^7.26.3",
+		"@types/papaparse": "^5.3.15",
 		"@types/react": "^19.0.12",
 		"@types/react-dom": "^19.0.4",
 		"babel-loader": "^10.0.0",
 		"css-loader": "^7.1.2",
+		"file-loader": "^6.2.0",
 		"html-webpack-plugin": "^5.6.3",
 		"sass": "^1.86.0",
 		"sass-loader": "^16.0.5",

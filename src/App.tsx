@@ -1,38 +1,65 @@
-import React from 'react';
-import './styles.scss';
-import Dropdown from './Dropdown/Dropdown';
-import Entry from './Entry/Entry';
-import CitySuggestions from './CitySuggestions/CitySuggestions';
+import React, { useEffect, useState } from "react";
+import "./styles.scss";
+import Dropdown from "./Dropdown/Dropdown";
+import Entry from "./Entry/Entry";
+import CitySuggestions from "./CitySuggestions/CitySuggestions";
+import { getWeatherData } from "./APIfetch";
+import { formatDate, WeatherData } from "./common";
+import { loadCities } from "./parseCSV";
 
-const App: React.FC = () =>
-{
-    const cities = ['Vilnius', 'Shanghai', 'Seattle'];
-    const weatherData = [
-        ['March 28th', 14, 13, 12],
-        ['March 29th', 24, 73, 9],
-        ['March 30th', 8, 53, 19],
-        ['March 31st', 8, 53, 18],
-        ['April 1st', 0, 0, 0],
-        ['April 2nd', 0, 10, 10],
-        ['April 3rd', 23, 13, 10],
-    ];
+const App: React.FC = () => {
+	const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+	const [error, setError] = useState<string | null>(null);
 
-    const handleSelection = (selected: String) =>
-    {
-        console.log('Selected city:', selected);
-    };
+	useEffect(() => {
+		getWeatherData()
+			.then((data) => setWeatherData(data))
+			.catch((err) => {
+				setError("Failed to fetch weather data.");
+				console.error(err);
+			});
+	}, []);
 
-    return (
-        <div className="container">
-            <h1>Search for a city</h1>
-            <Dropdown options={cities} onSelect={handleSelection} />
-            <CitySuggestions data={cities} />
-            <Entry data={["Date", "Temperature", "Humidity", "Wind speed"]}/>
-            {weatherData.map((entry, i) => (
-                <Entry data={entry} key={i} />
-            ))}
-        </div>
-    );
-}
+	const [cities, setCities] = useState<string[]>([]);
+	useEffect(() => {
+		const fetchData = async () => {
+			const responser = await fetch("/cities.csv");
+			//const cityData = await loadCities("cities.csv");
+			//setCities(cityData);
+		};
+
+		fetchData().catch(console.error);
+	}, []);
+
+	const handleSelection = (selected: String) => {
+		console.log("Selected city:", selected);
+	};
+
+	if (!weatherData) {
+		return <div>Loading...</div>;
+	}
+
+	return (
+		<div className="container">
+			<h1>Search for a city</h1>
+			<Dropdown options={cities} onSelect={handleSelection} />
+			{/* <CitySuggestions data={cities} /> */}
+			<Entry data={["Date", "Temperature °C", "Humidity %", "Wind speed m/s"]} />
+
+			{weatherData.hourly.time.map((entry, i) => (
+				<Entry
+					data={[
+						formatDate(entry.toISOString(), weatherData.timezone, weatherData.timezoneAbbreviation),
+						weatherData.hourly.windSpeed10m[i],
+						weatherData.hourly.relativeHumidity2m[i],
+						weatherData.hourly.temperature2m[i],
+					]}
+					key={i}
+				/>
+			))}
+			<img src="/test.jpg"></img>
+		</div>
+	);
+};
 
 export default App;
