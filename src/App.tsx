@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./styles.scss";
 import Dropdown from "./Dropdown/Dropdown";
 import Entry from "./Entry/Entry";
 import CitySuggestions from "./CitySuggestions/CitySuggestions";
@@ -24,8 +23,7 @@ const App: React.FC = () => {
 	const [cities, setCities] = useState<string[]>([]);
 	useEffect(() => {
 		const fetchData = async () => {
-			const responser = await fetch("/cities.csv");
-			//const cityData = await loadCities("cities.csv");
+			//const cityData = await loadCities("/cities.csv");
 			//setCities(cityData);
 		};
 
@@ -43,7 +41,7 @@ const App: React.FC = () => {
 	return (
 		<div className="container">
 			<h1>Search for a city</h1>
-			<Dropdown options={cities} onSelect={handleSelection} />
+			{/* <Dropdown options={cities} onSelect={handleSelection} /> */}
 			{/* <CitySuggestions data={cities} /> */}
 			<Entry data={["Date", "Temperature °C", "Humidity %", "Wind speed m/s"]} />
 
@@ -58,7 +56,6 @@ const App: React.FC = () => {
 					key={i}
 				/>
 			))}
-			<img src="/test.jpg"></img>
 		</div>
 	);
 };
