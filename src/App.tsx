@@ -62,8 +62,6 @@ const App: React.FC = () => {
 
 	const handleSelection = (city: City) => {
 		setSelectedCity(city);
-		console.log(`Selected city: ${city.city}`);
-
 		const storedCities = JSON.parse(localStorage.getItem("recentCities") || "[]");
 
 		const updatedCities = [
@@ -73,6 +71,15 @@ const App: React.FC = () => {
 
 		localStorage.setItem("recentCities", JSON.stringify(updatedCities));
 		setRecentCities(storedCities);
+
+		fetch("http://localhost:3001/log-action", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				city: city,
+				timestamp: new Date().toISOString(),
+			}),
+		}).catch((err) => console.error("Failed to log action:", err));
 
 		try {
 			getWeatherData(city.lat, city.lng)
